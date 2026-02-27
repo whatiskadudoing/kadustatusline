@@ -1,5 +1,5 @@
 {
-  "name": "ccstatus",
+  "name": "claude-status-widgets",
   "version": "0.1.0",
   "description": "A modular, testable statusline for Claude Code CLI",
   "module": "src/main.ts",
