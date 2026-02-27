@@ -47,27 +47,43 @@ export const SettingsSchema = z.object({
     .default({ enabled: true, character: "\u2500", width: 72, color: "#475569" }),
 
   lines: z.array(z.array(WidgetItemSchema)).default([
-    // Line 0 — branding
-    [{ id: "branding", type: "branding" }],
-    // Line 1 — context bar + model
+    // Line 0 — branding + location + weather
+    [
+      { id: "branding", type: "branding" },
+      { id: "sep-0a", type: "separator" },
+      { id: "location", type: "location" },
+      { id: "sep-0b", type: "separator" },
+      { id: "weather", type: "weather" },
+    ],
+    // Line 1 — context bar + tokens + model
     [
       { id: "context-bar", type: "context-bar" },
       { id: "sep-1a", type: "separator" },
+      { id: "token-breakdown", type: "token-breakdown" },
+      { id: "sep-1b", type: "separator" },
       { id: "model-name", type: "model-name" },
     ],
-    // Line 2 — usage / cost / duration
+    // Line 2 — usage / cost / duration / block timer
     [
       { id: "api-usage", type: "api-usage" },
       { id: "sep-2a", type: "separator" },
       { id: "session-cost", type: "session-cost" },
       { id: "sep-2b", type: "separator" },
       { id: "session-duration", type: "session-duration" },
+      { id: "sep-2c", type: "separator" },
+      { id: "block-timer", type: "block-timer" },
     ],
     // Line 3 — git + PR
     [
       { id: "git-status", type: "git-status" },
       { id: "sep-3a", type: "separator" },
       { id: "pr-dashboard", type: "pr-dashboard" },
+    ],
+    // Line 4 — system info
+    [
+      { id: "terminal-width", type: "terminal-width" },
+      { id: "sep-4a", type: "separator" },
+      { id: "memory-usage", type: "memory-usage" },
     ],
   ]),
 });
