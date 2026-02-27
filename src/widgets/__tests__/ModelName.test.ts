@@ -22,14 +22,19 @@ describe("ModelNameWidget", () => {
     expect(result?.text).toBe("Model: Opus 4.6");
   });
 
-  it("falls back to model id with version", () => {
+  it("falls back to model id without duplicating version", () => {
     const result = ModelNameWidget.render(item, ctx({ model: { id: "claude-sonnet-4-6" } }), DEFAULT_SETTINGS);
-    expect(result?.text).toBe("Model: claude-sonnet-4-6 4.6");
+    expect(result?.text).toBe("Model: claude-sonnet-4-6");
   });
 
   it("handles string model", () => {
     const result = ModelNameWidget.render(item, ctx({ model: "Haiku" }), DEFAULT_SETTINGS);
     expect(result?.text).toBe("Model: Haiku");
+  });
+
+  it("does not duplicate version when display_name already has digits", () => {
+    const result = ModelNameWidget.render(item, ctx({ model: { display_name: "Opus 4.6", id: "claude-opus-4-6" } }), DEFAULT_SETTINGS);
+    expect(result?.text).toBe("Model: Opus 4.6");
   });
 
   it("returns null when no model", () => {

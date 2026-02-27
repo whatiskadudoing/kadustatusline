@@ -19,7 +19,8 @@ export const ModelNameWidget: Widget = {
     } else {
       name = model.display_name ?? model.id ?? "unknown";
       // Extract version from id like "claude-opus-4-6" → "4.6"
-      if (model.id) {
+      // Only add version if display_name doesn't already contain digits
+      if (model.id && !/\d/.test(name)) {
         const match = model.id.match(/(\d+)-(\d+)$/);
         if (match) version = ` ${match[1]}.${match[2]}`;
       }

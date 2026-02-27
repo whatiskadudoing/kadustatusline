@@ -84,7 +84,7 @@ export async function renderAllLines(
       const sepWidth = settings.lineSeparator.width;
       const sepColor = settings.lineSeparator.color;
       const sepLine = colorize(sepChar.repeat(sepWidth), sepColor);
-      output.push(RESET + sepLine.replace(/ /g, "\u00A0"));
+      output.push(sepLine);
     }
 
     // Build the render context for this specific line index.
@@ -97,7 +97,7 @@ export async function renderAllLines(
     }
 
     const joined = parts.join("");
-    output.push(RESET + joined.replace(/ /g, "\u00A0"));
+    output.push(joined);
   }
 
   return output;

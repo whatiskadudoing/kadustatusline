@@ -34,8 +34,13 @@ async function main() {
 
     const lines = await renderAllLines(data, settings, ctx);
     for (const line of lines) {
+      // Strip ANSI codes to check if there's actual visible text
+      const stripped = line.replace(/\x1b\[[0-9;]*m/g, "").trim();
+      if (stripped.length === 0) continue;
+
+      // Replace spaces with non-breaking spaces, prefix with ANSI reset
       const output = "\x1b[0m" + line.replace(/ /g, "\u00A0");
-      process.stdout.write(output + "\n");
+      console.log(output);
     }
   } else {
     // Interactive mode: launch TUI configurator

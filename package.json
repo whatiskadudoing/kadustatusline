@@ -1,6 +1,6 @@
 {
   "name": "claude-status-widgets",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modular, testable statusline for Claude Code CLI",
   "module": "src/main.ts",
   "type": "module",
