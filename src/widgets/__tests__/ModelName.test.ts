@@ -17,19 +17,19 @@ function ctx(overrides: Partial<RenderContext["data"]> = {}): RenderContext {
 }
 
 describe("ModelNameWidget", () => {
-  it("renders model display name", () => {
+  it("renders model display name with version", () => {
     const result = ModelNameWidget.render(item, ctx({ model: { display_name: "Opus", id: "claude-opus-4-6" } }), DEFAULT_SETTINGS);
-    expect(result?.text).toBe("Opus");
+    expect(result?.text).toBe("Model: Opus 4.6");
   });
 
-  it("falls back to model id", () => {
+  it("falls back to model id with version", () => {
     const result = ModelNameWidget.render(item, ctx({ model: { id: "claude-sonnet-4-6" } }), DEFAULT_SETTINGS);
-    expect(result?.text).toBe("claude-sonnet-4-6");
+    expect(result?.text).toBe("Model: claude-sonnet-4-6 4.6");
   });
 
   it("handles string model", () => {
     const result = ModelNameWidget.render(item, ctx({ model: "Haiku" }), DEFAULT_SETTINGS);
-    expect(result?.text).toBe("Haiku");
+    expect(result?.text).toBe("Model: Haiku");
   });
 
   it("returns null when no model", () => {

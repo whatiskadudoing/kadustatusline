@@ -14,12 +14,15 @@ export const SessionCostWidget: Widget = {
 
     const formatted = `$${cost.toFixed(2)}`;
     return {
-      text: formatted,
-      segments: [{ text: formatted }],
+      text: `Cost: ${formatted}`,
+      segments: [
+        { text: "Cost: ", dim: true },
+        { text: formatted, fg: "#22c55e", bold: true },
+      ],
     };
   },
 
   getDefaultColor() {
-    return "#94a3b8";
+    return "#22c55e";
   },
 };

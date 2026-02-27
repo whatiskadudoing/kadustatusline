@@ -11,6 +11,9 @@
     "project_dir": "/Users/kadu/developer/trisor/safebase-admin-portal"
   },
   "version": "1.0.33",
+  "transcript_path": "/Users/kadu/.claude/projects/example/transcript.jsonl",
+  "output_style": { "name": "streaming" },
+  "exceeds_200k_tokens": false,
   "context_window": {
     "used_percentage": 53,
     "remaining_percentage": 47,

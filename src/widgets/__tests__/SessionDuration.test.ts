@@ -29,7 +29,7 @@ describe("SessionDurationWidget", () => {
       isPreview: false,
       lineIndex: 0,
     } as RenderContext;
-    expect(SessionDurationWidget.render(item, ctx, DEFAULT_SETTINGS)?.text).toBe("9m02s");
+    expect(SessionDurationWidget.render(item, ctx, DEFAULT_SETTINGS)?.text).toBe("Session: 9m02s");
   });
 
   it("returns null when no duration", () => {

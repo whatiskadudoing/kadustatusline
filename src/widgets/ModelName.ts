@@ -12,15 +12,29 @@ export const ModelNameWidget: Widget = {
     const model = ctx.data.model;
     if (!model) return null;
 
-    const name = typeof model === "string" ? model : model.display_name ?? model.id ?? "unknown";
+    let name: string;
+    let version = "";
+    if (typeof model === "string") {
+      name = model;
+    } else {
+      name = model.display_name ?? model.id ?? "unknown";
+      // Extract version from id like "claude-opus-4-6" → "4.6"
+      if (model.id) {
+        const match = model.id.match(/(\d+)-(\d+)$/);
+        if (match) version = ` ${match[1]}.${match[2]}`;
+      }
+    }
 
     return {
-      text: name,
-      segments: [{ text: name, bold: true }],
+      text: `Model: ${name}${version}`,
+      segments: [
+        { text: "Model: ", fg: "#06b6d4", dim: false },
+        { text: `${name}${version}`, fg: "#06b6d4", bold: true },
+      ],
     };
   },
 
   getDefaultColor() {
-    return "#cbd5e1";
+    return "#06b6d4";
   },
 };

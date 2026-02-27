@@ -16,7 +16,7 @@ const ctx: RenderContext = {
 describe("SeparatorWidget", () => {
   it("renders default separator character", () => {
     const result = SeparatorWidget.render(item, ctx, DEFAULT_SETTINGS);
-    expect(result?.text).toBe(" │ ");
+    expect(result?.text).toBe(" | ");
   });
 
   it("uses custom separator from settings", () => {

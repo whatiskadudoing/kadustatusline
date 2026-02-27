@@ -18,11 +18,11 @@ function ctx(cost?: number): RenderContext {
 
 describe("SessionCostWidget", () => {
   it("formats cost to 2 decimal places", () => {
-    expect(SessionCostWidget.render(item, ctx(2.456), DEFAULT_SETTINGS)?.text).toBe("$2.46");
+    expect(SessionCostWidget.render(item, ctx(2.456), DEFAULT_SETTINGS)?.text).toBe("Cost: $2.46");
   });
 
   it("formats zero cost", () => {
-    expect(SessionCostWidget.render(item, ctx(0), DEFAULT_SETTINGS)?.text).toBe("$0.00");
+    expect(SessionCostWidget.render(item, ctx(0), DEFAULT_SETTINGS)?.text).toBe("Cost: $0.00");
   });
 
   it("returns null when no cost data", () => {

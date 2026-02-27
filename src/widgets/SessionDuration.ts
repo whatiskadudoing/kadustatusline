@@ -25,12 +25,15 @@ export const SessionDurationWidget: Widget = {
 
     const formatted = formatDuration(durationMs);
     return {
-      text: formatted,
-      segments: [{ text: formatted }],
+      text: `Session: ${formatted}`,
+      segments: [
+        { text: "Session: ", dim: true },
+        { text: formatted, fg: "#eab308" },
+      ],
     };
   },
 
   getDefaultColor() {
-    return "#94a3b8";
+    return "#eab308";
   },
 };

@@ -33,6 +33,29 @@ export const StatusDataSchema = z
 
     version: z.string().optional(),
 
+    exceeds_200k_tokens: z.boolean().optional(),
+
+    output_style: z
+      .object({
+        name: z.string().optional(),
+      })
+      .passthrough()
+      .optional(),
+
+    vim: z
+      .object({
+        mode: z.string().optional(),
+      })
+      .passthrough()
+      .optional(),
+
+    agent: z
+      .object({
+        name: z.string().optional(),
+      })
+      .passthrough()
+      .optional(),
+
     context_window: z
       .object({
         used_percentage: z.number().optional(),

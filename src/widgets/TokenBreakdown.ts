@@ -1,4 +1,4 @@
-import type { Widget, WidgetItem, WidgetOutput } from "../types/Widget.ts";
+import type { Widget, WidgetItem, WidgetOutput, ColorSegment } from "../types/Widget.ts";
 import type { RenderContext } from "../types/RenderContext.ts";
 import type { Settings } from "../types/Settings.ts";
 
@@ -11,25 +11,39 @@ function formatTokens(n: number): string {
 export const TokenBreakdownWidget: Widget = {
   name: "token-breakdown",
   displayName: "Token Breakdown",
-  description: "Input/output token counts",
+  description: "Input, output, cached, and total token counts",
   category: "context",
 
-  render(_item: WidgetItem, ctx: RenderContext, _settings: Settings): WidgetOutput | null {
+  render(_item: WidgetItem, ctx: RenderContext, settings: Settings): WidgetOutput | null {
     const cw = ctx.data.context_window;
     if (!cw) return null;
 
     const input = cw.total_input_tokens ?? 0;
     const output = cw.total_output_tokens ?? 0;
+    const cached =
+      (cw.current_usage?.cache_read_input_tokens ?? 0) +
+      (cw.current_usage?.cache_creation_input_tokens ?? 0);
+    const total = input + output + cached;
 
-    const text = `↓${formatTokens(input)} ↑${formatTokens(output)}`;
-    return {
-      text,
-      segments: [
-        { text: `↓${formatTokens(input)}`, fg: "#93c5fd" },
-        { text: " " },
-        { text: `↑${formatTokens(output)}`, fg: "#c4b5fd" },
-      ],
-    };
+    const sepChar = settings.separator.character;
+    const sepColor = settings.separator.color;
+
+    const segments: ColorSegment[] = [
+      { text: "In: ", dim: true },
+      { text: formatTokens(input), fg: "#93c5fd" },
+      { text: ` ${sepChar} `, fg: sepColor, dim: true },
+      { text: "Out: ", dim: true },
+      { text: formatTokens(output), fg: "#c4b5fd" },
+      { text: ` ${sepChar} `, fg: sepColor, dim: true },
+      { text: "Cached: ", dim: true },
+      { text: formatTokens(cached), fg: "#93c5fd" },
+      { text: ` ${sepChar} `, fg: sepColor, dim: true },
+      { text: "Total: ", dim: true },
+      { text: formatTokens(total), fg: "#e2e8f0", bold: true },
+    ];
+
+    const text = `In: ${formatTokens(input)} | Out: ${formatTokens(output)} | Cached: ${formatTokens(cached)} | Total: ${formatTokens(total)}`;
+    return { text, segments };
   },
 
   getDefaultColor() {
