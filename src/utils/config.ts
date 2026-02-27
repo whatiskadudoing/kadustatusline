@@ -4,11 +4,11 @@ import { join } from "node:path";
 import { SettingsSchema, DEFAULT_SETTINGS } from "../types/Settings.ts";
 import type { Settings } from "../types/Settings.ts";
 
-const CONFIG_DIR = join(homedir(), ".config", "kadustatusline");
+const CONFIG_DIR = join(homedir(), ".config", "ccstatus");
 const CONFIG_FILE = join(CONFIG_DIR, "settings.json");
 
 /**
- * Load user settings from ~/.config/kadustatusline/settings.json.
+ * Load user settings from ~/.config/ccstatus/settings.json.
  * Falls back to DEFAULT_SETTINGS when the file does not exist or is invalid.
  */
 export async function loadSettings(): Promise<Settings> {
@@ -23,7 +23,7 @@ export async function loadSettings(): Promise<Settings> {
 }
 
 /**
- * Persist settings to ~/.config/kadustatusline/settings.json.
+ * Persist settings to ~/.config/ccstatus/settings.json.
  * Creates the config directory if it does not exist.
  */
 export async function saveSettings(settings: Settings): Promise<void> {

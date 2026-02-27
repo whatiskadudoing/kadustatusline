@@ -1,18 +1,20 @@
+import { spawnSync } from "node:child_process";
+
 /**
  * Detect terminal width using a fallback chain:
- *   1. `stty size` via Bun.spawn
- *   2. `tput cols` via Bun.spawn
+ *   1. `stty size`
+ *   2. `tput cols`
  *   3. COLUMNS environment variable
  *   4. Default: 80
  */
 export function getTerminalWidth(): number {
   // 1. Try stty
   try {
-    const proc = Bun.spawnSync(["stty", "size"], {
-      stdin: "inherit",
-      stderr: "pipe",
+    const proc = spawnSync("stty", ["size"], {
+      stdio: ["inherit", "pipe", "pipe"],
+      encoding: "utf-8",
     });
-    const output = proc.stdout.toString().trim();
+    const output = (proc.stdout ?? "").trim();
     if (output) {
       const cols = parseInt(output.split(/\s+/)[1] ?? "", 10);
       if (cols > 0) return cols;
@@ -21,11 +23,11 @@ export function getTerminalWidth(): number {
 
   // 2. Try tput
   try {
-    const proc = Bun.spawnSync(["tput", "cols"], {
-      stdin: "inherit",
-      stderr: "pipe",
+    const proc = spawnSync("tput", ["cols"], {
+      stdio: ["inherit", "pipe", "pipe"],
+      encoding: "utf-8",
     });
-    const output = proc.stdout.toString().trim();
+    const output = (proc.stdout ?? "").trim();
     if (output) {
       const cols = parseInt(output, 10);
       if (cols > 0) return cols;

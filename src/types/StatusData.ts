@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /**
- * Zod schema for the JSON payload that Claude Code pipes into kadustatusline.
+ * Zod schema for the JSON payload that Claude Code pipes into ccstatus.
  * Uses `.passthrough()` so unknown future fields are preserved, not stripped.
  */
 export const StatusDataSchema = z

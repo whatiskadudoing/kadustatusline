@@ -13,7 +13,7 @@ async function main() {
     const raw = await readStdin();
     const parsed = StatusDataSchema.safeParse(JSON.parse(raw));
     if (!parsed.success) {
-      process.stderr.write(`kadustatusline: invalid input: ${parsed.error.message}\n`);
+      process.stderr.write(`ccstatus: invalid input: ${parsed.error.message}\n`);
       process.exit(1);
     }
 
@@ -45,6 +45,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  process.stderr.write(`kadustatusline: ${err}\n`);
+  process.stderr.write(`ccstatus: ${err}\n`);
   process.exit(1);
 });

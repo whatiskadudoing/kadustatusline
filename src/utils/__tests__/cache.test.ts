@@ -6,7 +6,7 @@ const TEST_KEY = "test-vitest-cache";
 
 afterEach(() => {
   try {
-    unlinkSync(`/tmp/kadusl-${TEST_KEY}`);
+    unlinkSync(`/tmp/ccstatus-${TEST_KEY}`);
   } catch {
     // ignore
   }
@@ -52,8 +52,8 @@ describe("FileCache", () => {
       ttlSeconds: 60,
       fetch: async () => "cached",
     });
-    expect(existsSync(`/tmp/kadusl-${TEST_KEY}`)).toBe(true);
+    expect(existsSync(`/tmp/ccstatus-${TEST_KEY}`)).toBe(true);
     cache.invalidate(TEST_KEY);
-    expect(existsSync(`/tmp/kadusl-${TEST_KEY}`)).toBe(false);
+    expect(existsSync(`/tmp/ccstatus-${TEST_KEY}`)).toBe(false);
   });
 });

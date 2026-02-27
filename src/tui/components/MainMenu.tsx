@@ -26,7 +26,7 @@ export function MainMenu({ onSelect }: MainMenuProps) {
   return (
     <Box flexDirection="column">
       <Box marginBottom={1}>
-        <Text bold color="blue">kadustatusline</Text>
+        <Text bold color="blue">ccstatus</Text>
         <Text dimColor> configurator</Text>
       </Box>
       {ITEMS.map((item, i) => (

@@ -13,10 +13,10 @@ export interface CacheOptions<T> {
 }
 
 /**
- * Generic TTL-based file-backed cache stored in /tmp/kadusl-*.
+ * Generic TTL-based file-backed cache stored in /tmp/ccstatus-*.
  */
 export class FileCache {
-  private prefix = "/tmp/kadusl-";
+  private prefix = "/tmp/ccstatus-";
 
   /**
    * Return cached value if fresh, otherwise call fetch() and persist the result.

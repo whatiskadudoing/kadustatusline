@@ -16,7 +16,7 @@ const EXAMPLE_DATA = {
     total_output_tokens: 21000,
   },
   cost: { total_cost_usd: 1.83, total_duration_ms: 542000 },
-  workspace: { cwd: "/Users/kadu/developer/trisor/kadustatusline" },
+  workspace: { cwd: "/Users/kadu/developer/trisor/ccstatus" },
 } as import("../../types/StatusData.ts").StatusData;
 
 export interface PreviewProps {

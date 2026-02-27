@@ -28,7 +28,7 @@ export function InstallMenu({ onBack }: InstallMenuProps) {
 
         existing.statusLine = {
           type: "command",
-          command: "kadustatusline",
+          command: "ccstatus",
         };
 
         writeFileSync(claudeSettingsPath, JSON.stringify(existing, null, 2) + "\n");
@@ -51,7 +51,7 @@ export function InstallMenu({ onBack }: InstallMenuProps) {
 
       {status === "prompt" && (
         <Box flexDirection="column" marginTop={1}>
-          <Text>This will update your Claude Code settings to use kadustatusline:</Text>
+          <Text>This will update your Claude Code settings to use ccstatus:</Text>
           <Box marginTop={1}>
             <Text dimColor>{claudeSettingsPath}</Text>
           </Box>

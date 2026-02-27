@@ -1,16 +1,23 @@
 {
-  "name": "kadustatusline",
+  "name": "ccstatus",
   "version": "0.1.0",
   "description": "A modular, testable statusline for Claude Code CLI",
   "module": "src/main.ts",
   "type": "module",
   "bin": {
-    "kadustatusline": "dist/kadustatusline.js"
+    "ccstatus": "dist/ccstatus.js"
   },
   "files": ["dist/"],
+  "keywords": ["claude", "claude-code", "statusline", "cli", "terminal"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whatiskadudoing/kadustatusline.git"
+  },
+  "license": "MIT",
+  "author": "kadu",
   "scripts": {
     "start": "bun run src/main.ts",
-    "build": "bun build src/main.ts --target=bun --outfile=dist/kadustatusline.js && printf '#!/usr/bin/env bun\n' | cat - dist/kadustatusline.js > dist/tmp.js && mv dist/tmp.js dist/kadustatusline.js && chmod +x dist/kadustatusline.js",
+    "build": "bun build src/main.ts --target=bun --outfile=dist/ccstatus.js && printf '#!/usr/bin/env bun\\n' | cat - dist/ccstatus.js > dist/tmp.js && mv dist/tmp.js dist/ccstatus.js && chmod +x dist/ccstatus.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "example": "cat scripts/payload.example.json | bun run src/main.ts",
