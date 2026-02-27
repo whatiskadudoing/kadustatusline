@@ -39,12 +39,12 @@ export const SettingsSchema = z.object({
 
   lineSeparator: z
     .object({
-      enabled: z.boolean().default(true),
+      enabled: z.boolean().default(false),
       character: z.string().default("\u2500"),
       width: z.number().default(72),
       color: z.string().default("#475569"),
     })
-    .default({ enabled: true, character: "\u2500", width: 72, color: "#475569" }),
+    .default({ enabled: false, character: "\u2500", width: 72, color: "#475569" }),
 
   lines: z.array(z.array(WidgetItemSchema)).default([
     // Line 0 — branding + location + weather
