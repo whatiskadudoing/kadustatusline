@@ -1,0 +1,36 @@
+{
+  "name": "kadustatusline",
+  "version": "0.1.0",
+  "description": "A modular, testable statusline for Claude Code CLI",
+  "module": "src/main.ts",
+  "type": "module",
+  "bin": {
+    "kadustatusline": "dist/kadustatusline.js"
+  },
+  "files": ["dist/"],
+  "scripts": {
+    "start": "bun run src/main.ts",
+    "build": "bun build src/main.ts --target=bun --outfile=dist/kadustatusline.js && printf '#!/usr/bin/env bun\n' | cat - dist/kadustatusline.js > dist/tmp.js && mv dist/tmp.js dist/kadustatusline.js && chmod +x dist/kadustatusline.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "example": "cat scripts/payload.example.json | bun run src/main.ts",
+    "typecheck": "bun tsc --noEmit",
+    "prepublishOnly": "bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19.2.14",
+    "ink-testing-library": "^4.0.0",
+    "react-devtools-core": "^7.0.1",
+    "strip-ansi": "^7.2.0",
+    "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "ink": "^6.8.0",
+    "react": "^19.2.4",
+    "zod": "^4.3.6"
+  }
+}

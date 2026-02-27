@@ -1,0 +1,34 @@
+{
+  "hook_event_name": "status_line",
+  "session_id": "abc-123-def",
+  "cwd": "/Users/kadu/developer/trisor/safebase-admin-portal",
+  "model": {
+    "id": "claude-opus-4-6",
+    "display_name": "Opus"
+  },
+  "workspace": {
+    "current_dir": "/Users/kadu/developer/trisor/safebase-admin-portal",
+    "project_dir": "/Users/kadu/developer/trisor/safebase-admin-portal"
+  },
+  "version": "1.0.33",
+  "context_window": {
+    "used_percentage": 53,
+    "remaining_percentage": 47,
+    "context_window_size": 200000,
+    "total_input_tokens": 85000,
+    "total_output_tokens": 21000,
+    "current_usage": {
+      "input_tokens": 5000,
+      "output_tokens": 1000,
+      "cache_creation_input_tokens": 100,
+      "cache_read_input_tokens": 500
+    }
+  },
+  "cost": {
+    "total_cost_usd": 1.83,
+    "total_duration_ms": 542000,
+    "total_api_duration_ms": 380000,
+    "total_lines_added": 210,
+    "total_lines_removed": 45
+  }
+}
