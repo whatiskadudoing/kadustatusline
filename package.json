@@ -1,11 +1,11 @@
 {
   "name": "claude-status-widgets",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A modular, testable statusline for Claude Code CLI",
   "module": "src/main.ts",
   "type": "module",
   "bin": {
-    "ccstatus": "dist/ccstatus.js"
+    "claude-status": "dist/claude-status.js"
   },
   "files": ["dist/"],
   "keywords": ["claude", "claude-code", "statusline", "cli", "terminal"],
@@ -17,7 +17,7 @@
   "author": "kadu",
   "scripts": {
     "start": "bun run src/main.ts",
-    "build": "bun build src/main.ts --target=bun --outfile=dist/ccstatus.js && printf '#!/usr/bin/env bun\\n' | cat - dist/ccstatus.js > dist/tmp.js && mv dist/tmp.js dist/ccstatus.js && chmod +x dist/ccstatus.js",
+    "build": "bun build src/main.ts --target=bun --outfile=dist/claude-status.js && printf '#!/usr/bin/env bun\\n' | cat - dist/claude-status.js > dist/tmp.js && mv dist/tmp.js dist/claude-status.js && chmod +x dist/claude-status.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "example": "cat scripts/payload.example.json | bun run src/main.ts",
