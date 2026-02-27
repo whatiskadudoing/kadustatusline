@@ -1,7 +1,7 @@
-/**
- * macOS Keychain integration for retrieving the Anthropic / Claude Code
- * OAuth access token.
- */
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
 
 /**
  * Attempt to read the Claude Code OAuth token from the macOS keychain.
@@ -9,26 +9,13 @@
  */
 export async function getAnthropicOAuthToken(): Promise<string | null> {
   try {
-    const proc = Bun.spawn(
-      [
-        "security",
-        "find-generic-password",
-        "-s",
-        "Claude Code-credentials",
-        "-w",
-      ],
-      {
-        stdout: "pipe",
-        stderr: "pipe",
-      },
+    const { stdout } = await execFileAsync(
+      "security",
+      ["find-generic-password", "-s", "Claude Code-credentials", "-w"],
+      { timeout: 3000 },
     );
 
-    const output = await new Response(proc.stdout).text();
-    const exitCode = await proc.exited;
-
-    if (exitCode !== 0) return null;
-
-    const trimmed = output.trim();
+    const trimmed = stdout.trim();
     if (!trimmed) return null;
 
     const parsed = JSON.parse(trimmed) as Record<string, unknown>;

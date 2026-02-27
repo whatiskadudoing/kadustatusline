@@ -1,4 +1,8 @@
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import type { PrData } from "../types/RenderContext.ts";
+
+const execFileAsync = promisify(execFile);
 
 /**
  * Fetch open PRs authored by the current user via the `gh` CLI.
@@ -6,28 +10,19 @@ import type { PrData } from "../types/RenderContext.ts";
  */
 export async function fetchPrs(): Promise<PrData[] | null> {
   try {
-    const proc = Bun.spawn(
+    const { stdout } = await execFileAsync(
+      "gh",
       [
-        "gh",
-        "pr",
-        "list",
-        "--author",
-        "@me",
-        "--state",
-        "open",
-        "--json",
-        "number,title,isDraft,reviewDecision,reviews,comments",
-        "--limit",
-        "10",
+        "pr", "list",
+        "--author", "@me",
+        "--state", "open",
+        "--json", "number,title,isDraft,reviewDecision,reviews,comments",
+        "--limit", "10",
       ],
-      { stdout: "pipe", stderr: "pipe" },
+      { timeout: 10000 },
     );
 
-    const output = await new Response(proc.stdout).text();
-    const exitCode = await proc.exited;
-    if (exitCode !== 0) return null;
-
-    const raw = JSON.parse(output.trim()) as Array<{
+    const raw = JSON.parse(stdout.trim()) as Array<{
       number: number;
       title: string;
       isDraft: boolean;
